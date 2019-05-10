@@ -12,11 +12,13 @@
 <body>
     <header id="page-header"></header>
     <main id="content">
-        <h1>Pretraži vijesti</h1>
-        <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Pretraži">
-            <input type="image" id="search-button" src="./Asseti/search.svg">
+        <div class="content-width">
+            <h1>Pretraži vijesti</h1>
         </div>
+        <form id="search-bar" name="search-bar" action="" method="GET">
+            <input type="text" id="search-input" name="search-input" placeholder="Pretraži">
+            <input type="submit" value="" id="search-button" name="search-button" >
+        </form>
         <div id="news-display">
             <button class="arrow arrow-left">
 

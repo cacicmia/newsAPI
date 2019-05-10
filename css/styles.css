@@ -1,8 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:800");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-flow: column;
@@ -15,47 +25,60 @@ body {
   margin: 0 auto;
 }
 
-h1 {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 24px;
-  color: #494949;
+.content-width {
+  width: 482px;
+  margin: 0 auto;
 }
 
-.search-bar {
-  display: inline-block;
-  padding: 10px 5px;
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2em;
+  color: #494949;
   margin: 30px 0;
+}
+
+#search-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 30px auto;
   border: 1px solid #494949;
   width: 482px;
   border-radius: 5px;
   position: relative;
 }
 
-.search-bar #search-button {
-  background: url(../Asseti/search.svg);
+#search-bar #search-button {
+  background: url(../Asseti/search.svg) no-repeat center/contain;
   margin: 0;
+  padding: 10px 15px;
   vertical-align: middle;
-  position: absolute;
-  right: 10px;
-}
-
-.search-bar #search-input {
   border: none;
 }
 
-.search-bar #search-input::-webkit-input-placeholder {
+#search-bar #search-input {
+  width: 90%;
+  border: none;
+  background: none;
+}
+
+#search-bar #search-input::-webkit-input-placeholder {
+  padding: 5px;
   color: #acacac;
 }
 
-.search-bar #search-input:-ms-input-placeholder {
+#search-bar #search-input:-ms-input-placeholder {
+  padding: 5px;
   color: #acacac;
 }
 
-.search-bar #search-input::-ms-input-placeholder {
+#search-bar #search-input::-ms-input-placeholder {
+  padding: 5px;
   color: #acacac;
 }
 
-.search-bar #search-input::placeholder {
+#search-bar #search-input::placeholder {
+  padding: 5px;
   color: #acacac;
 }
 
@@ -66,6 +89,7 @@ h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin: 0 auto;
 }
 
 #news-display .arrow {

@@ -8,50 +8,68 @@ $colors: (
     @return map-get($colors, $color-name);
 }
 $width: 482px; 
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body{
     display: flex;
+    align-items: center;
     flex-flow: column;
     box-sizing: border-box;
 }
 
+
 #content {
     margin: 0 auto;
+    
+}
+.content-width{
+    width: $width;
+    margin: 0 auto;
+
 }
 h1 {
     font-family: 'Open Sans', sans-serif;
-    font-size: 24px;
+    font-size: 2em;
     color: color(text);
-}
-.search-bar {
-    display: inline-block;
-    padding: 10px 5px;
     margin: 30px 0;
+   
+}
+#search-bar {
+    display: flex;
+  
+    margin: 30px auto;
     border: 1px solid color(text);;
     width: $width;
     border-radius: 5px;
     position: relative;
     
+    
     #search-button {
-        background: url(../Asseti/search.svg);   
+        background: url(../Asseti/search.svg) no-repeat center/contain;   
         margin: 0;
+        padding: 10px 15px;
         vertical-align: middle;
-        position: absolute;
-        right: 10px;
-        
-        
+        border: none;   
         
     }
     #search-input{
+        width: 90%;
         border: none;
+        background: none;
       
     }
     #search-input::placeholder {
+        padding: 5px;
         color: color(placeholder);
     }
 }
 #news-display {
     display: flex;
     align-items: center;
+    margin: 0 auto;
 
     .arrow {
        padding: 15px;
