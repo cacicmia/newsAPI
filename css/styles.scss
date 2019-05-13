@@ -8,6 +8,7 @@ $colors: (
     @return map-get($colors, $color-name);
 }
 $width: 482px; 
+$height: 326px;
 *{
     margin:0;
     padding: 0;
@@ -68,6 +69,7 @@ h1 {
 }
 #news-display {
     display: flex;
+  
     align-items: center;
     margin: 0 auto;
 
@@ -84,13 +86,15 @@ h1 {
     }
     .news-preview{
         width: $width;
+        height: $height;
         display:flex;
+        
         #news-img{
-            width: 47,3%;
+            
         }
         #news-article{
-            width: 52,69%;
             padding: 20px;
+            background-color: color(background);
         }
     }
 }
