@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:800');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
 $colors: (
     text: #494949,
     background: #f2f2f2,
@@ -13,6 +13,8 @@ $height: 326px;
     margin:0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+ 
 }
 body{
     display: flex;
@@ -32,12 +34,14 @@ body{
 
 }
 h1 {
-    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    letter-spacing: -1px;
     font-size: 2em;
     color: color(text);
     margin: 30px 0;
    
 }
+
 #search-bar {
     display: flex;
   
@@ -60,12 +64,13 @@ h1 {
         width: 90%;
         border: none;
         background: none;
-      
+        padding:5px;
     }
     #search-input::placeholder {
         padding: 5px;
         color: color(placeholder);
     }
+
 }
 #news-display {
     display: flex;
@@ -78,10 +83,10 @@ h1 {
        margin: 20px;
        border: none;
     }
-    .arrow-left {
+    #arrow-left {
         background: url(../Asseti/left-arrow.svg) no-repeat center/contain;
     }
-    .arrow-right{
+    #arrow-right{
         background: url(../Asseti/right-arrow.svg) no-repeat center/contain;
     }
     .news-preview{
@@ -90,11 +95,33 @@ h1 {
         display:flex;
         
         #news-img{
+            overflow: auto;
+            object-fit: cover;
             
         }
         #news-article{
             padding: 20px;
             background-color: color(background);
+            font-size: 0.8em;
+            position: relative;
+          
+            #news-heading {
+                font-weight: 800;
+                letter-spacing: -1px;
+                color: color(text);
+                font-size: 1.2em;
+                padding-bottom: 1em;
+            }
+            a{
+                color: color(text);
+                text-decoration: none;
+                border-bottom: 1px solid color(text);
+                position: absolute;
+                bottom: 1em;
+            }
+            #news-content{
+                padding: 1em 0;
+            }
         }
     }
 }
