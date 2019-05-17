@@ -11,28 +11,30 @@ let newsDisplay = {
     
     },
     performSearch (e) {
-        e.preventDefault();
+        e.preventDefault(); 
         
         newsDisplay.queryValue = $('#search-input').val();
         let url = `https://newsapi.org/v2/everything?q=${newsDisplay.queryValue}&apiKey=447fc2f2b2f742588d178279786b6a9a`;
         $.ajax(url).done(newsDisplay.respond);
     },
     respond (response){
-              
-        if (response.articles.length>0){
+              newsDisplay.articles=[];
+         if (response.articles.length>0){
             newsDisplay.current = 0;
             newsDisplay.articles =  response.articles.slice(0,5);
-            
+          
         newsDisplay.renderNews(newsDisplay.articles[0]);
         } else {
              newsDisplay.noContent();
+           
             
             
         }
     },
    
     renderNews (news) {
-        if (this.img) {
+
+        if (news.urlToImage) {    
         this.img.attr('src',news.urlToImage);
         } else {
         this.img.attr('src',"./Asseti/Placeholder.jpg");   
@@ -46,7 +48,7 @@ let newsDisplay = {
 
     }, 
     adjustContent(content, description){
-        let newContent =" ";
+        let newContent ="";
         if (content){ 
         let arr= content.split(' ');
         if (arr.length<50) {
@@ -65,12 +67,18 @@ let newsDisplay = {
         return newContent.concat('...') ;
     },
     slide (n) {
+     
         this.arrowLeft.off('click');
         this.arrowRight.off('click');
+        
+        if (this.articles.length){
         this.currentChange(n);
         this.renderNews(this.articles[this.current]);
        
-    },
+        } else {
+           
+        }
+        },
     noContent () {
         
         this.img.attr('src',"./Asseti/Placeholder.jpg");
@@ -78,15 +86,12 @@ let newsDisplay = {
         this.author.html('');
         this.origin.attr('href','#');
         this.articles= [];
-        if (this.queryValue) {
-            this.content.html('Ne postoje rezultati');
-        } else {
-            this.content.html('');
-        
-        }
+        this.content.html('Ne postoje rezultati');
+      
        
     },
     currentChange(n){
+        if (newsDisplay.articles.length > 0) {
         let last=this.articles.length-1;
         if (n){
             this.current=(this.current===last ? 0 : this.current+1);
@@ -97,6 +102,7 @@ let newsDisplay = {
         }
 
     }
+}
     
 
 }
