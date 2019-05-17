@@ -7,13 +7,14 @@ $colors: (
 @function color($color-name){
     @return map-get($colors, $color-name);
 }
-$width: 482px; 
-$height: 326px;
+$width: 492px; 
+$height: 60vh;
 *{
     margin:0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+  
  
 }
 body{
@@ -50,21 +51,23 @@ h1 {
     width: $width;
     border-radius: 5px;
     position: relative;
+    overflow: hidden;
     
     
     #search-button {
-        background: url(../Asseti/search.svg) no-repeat center/contain;   
+        background: url(../Asseti/search.svg) no-repeat right/contain;   
         margin: 0;
         padding: 10px 15px;
         vertical-align: middle;
         border: none;   
-        
+        border-right: 10px solid #fff;
+       
     }
     #search-input{
         width: 90%;
         border: none;
         background: none;
-        padding:5px;
+        padding: 5px;
     }
     #search-input::placeholder {
         padding: 5px;
@@ -79,7 +82,7 @@ h1 {
     margin: 0 auto;
 
     .arrow {
-       padding: 15px;
+       padding: 1em;
        margin: 20px;
        border: none;
     }
@@ -92,25 +95,37 @@ h1 {
     .news-preview{
         width: $width;
         height: $height;
+        border-radius:5px;
+        overflow:hidden;
         display:flex;
+        
         
         #news-img{
             overflow: auto;
             object-fit: cover;
+            min-width: 150px;
             
         }
         #news-article{
             padding: 20px;
             background-color: color(background);
-            font-size: 0.8em;
+            min-width: 52%;
             position: relative;
+            .small {
+                font-size: 0.8em;
+            }
+            p {
+                font-size:0.9em;
+                letter-spacing: -0.5px;
+            }
           
             #news-heading {
                 font-weight: 800;
                 letter-spacing: -1px;
                 color: color(text);
-                font-size: 1.2em;
+                font-size: 1em;
                 padding-bottom: 1em;
+                 
             }
             a{
                 color: color(text);
@@ -118,11 +133,33 @@ h1 {
                 border-bottom: 1px solid color(text);
                 position: absolute;
                 bottom: 1em;
+               
             }
             #news-content{
                 padding: 1em 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }
 }
-
+@media screen and (max-width:620px){
+    
+    #content  
+   {
+        width: 100%;
+   
+    } 
+    .content-width,
+    #search-bar {
+        width: 80%;
+    }
+    #news-display .news-preview  {
+        flex-flow: column; 
+       width:100vw;
+    }
+  
+    #news-img{
+        min-height: 150px;
+    }
+}

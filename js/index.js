@@ -12,33 +12,55 @@ let newsDisplay = {
     },
     performSearch (e) {
         e.preventDefault();
-        this.queryValue = $('#search-input').val();
-        $.getJSON(`https://newsapi.org/v2/top-headlines?q=${this.queryValue}&apiKey=447fc2f2b2f742588d178279786b6a9a`).done(newsDisplay.respond);
+        
+        newsDisplay.queryValue = $('#search-input').val();
+        let url = `https://newsapi.org/v2/everything?q=${newsDisplay.queryValue}&apiKey=447fc2f2b2f742588d178279786b6a9a`;
+        $.ajax(url).done(newsDisplay.respond);
     },
     respond (response){
-        console.log(response);
+       console.log(response.articles)
         
         if (response.articles.length>0){
             newsDisplay.current = 0;
             newsDisplay.articles =  response.articles.slice(0,5);
         newsDisplay.renderNews(newsDisplay.articles[0]);
         } else {
-            noImage();
+             newsDisplay.noContent();
+            
+            
         }
     },
    
     renderNews (news) {
-        console.log(news);
-        let articleClip= ((news.content) ?  news.content.substring(0,50): news.description).concat('...') ;
+        
         this.img.attr('src',news.urlToImage);
        this.heading.html(news.title);
         this.author.html(news.author);
-       this.content.html(articleClip);
+       this.content.html(this.adjustContent(news.content, news.description));
         this.origin.attr('href', news.url);
         this.arrowLeft.click(this.slide.bind(this,false));
         this.arrowRight.click(this.slide.bind(this,true));
 
     }, 
+    adjustContent(content, description){
+        let newContent =" ";
+        if (content){ 
+        let arr= content.split(' ');
+        if (arr.length<50) {
+       newContent= arr.slice(0, arr.length-2).join(' ');
+        } else {
+            newContent= arr.slice(0,49).join(' ');
+        }
+      
+        } else if (description){
+           
+           newContent = description; 
+        } else {
+            newContent= 'No content available';
+        }
+        
+        return newContent.concat('...') ;
+    },
     slide (n) {
         this.arrowLeft.off('click');
         this.arrowRight.off('click');
@@ -49,8 +71,19 @@ let newsDisplay = {
             this.renderNews(this.articles[this.current]);
        
     },
-    noImage () {
-       console.log('this should clean the screen');
+    noContent () {
+        console.log('query=',this.queryValue);
+        this.img.attr('src',"./Asseti/Placeholder.jpg");
+        this.heading.html(this.queryValue);
+        this.author.html('');
+        this.origin.attr('href','#');
+        if (this.queryValue) {
+            this.content.html('Ne postoje rezultati');
+        } else {
+            this.content.html('');
+        
+        }
+       
     },
     currentChange(n){
         let last=this.articles.length-1;
