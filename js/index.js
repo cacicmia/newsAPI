@@ -22,6 +22,7 @@ let newsDisplay = {
         if (response.articles.length>0){
             newsDisplay.current = 0;
             newsDisplay.articles =  response.articles.slice(0,5);
+            
         newsDisplay.renderNews(newsDisplay.articles[0]);
         } else {
              newsDisplay.noContent();
@@ -31,9 +32,12 @@ let newsDisplay = {
     },
    
     renderNews (news) {
-        this.noContent();
+        if (this.img) {
         this.img.attr('src',news.urlToImage);
-       this.heading.html(news.title);
+        } else {
+        this.img.attr('src',"./Asseti/Placeholder.jpg");   
+        }
+        this.heading.html(news.title);
         this.author.html(news.author);
        this.content.html(this.adjustContent(news.content, news.description));
         this.origin.attr('href', news.url);
@@ -63,11 +67,8 @@ let newsDisplay = {
     slide (n) {
         this.arrowLeft.off('click');
         this.arrowRight.off('click');
-        console.log('current',this.current);
-        console.log('articles',this.articles);
         this.currentChange(n);
-        console.log(this.current)
-            this.renderNews(this.articles[this.current]);
+        this.renderNews(this.articles[this.current]);
        
     },
     noContent () {
@@ -76,6 +77,7 @@ let newsDisplay = {
         this.heading.html(this.queryValue);
         this.author.html('');
         this.origin.attr('href','#');
+        this.articles= [];
         if (this.queryValue) {
             this.content.html('Ne postoje rezultati');
         } else {
