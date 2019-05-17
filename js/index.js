@@ -18,8 +18,7 @@ let newsDisplay = {
         $.ajax(url).done(newsDisplay.respond);
     },
     respond (response){
-       console.log(response.articles)
-        
+              
         if (response.articles.length>0){
             newsDisplay.current = 0;
             newsDisplay.articles =  response.articles.slice(0,5);
@@ -32,7 +31,7 @@ let newsDisplay = {
     },
    
     renderNews (news) {
-        
+        this.noContent();
         this.img.attr('src',news.urlToImage);
        this.heading.html(news.title);
         this.author.html(news.author);
@@ -72,7 +71,7 @@ let newsDisplay = {
        
     },
     noContent () {
-        console.log('query=',this.queryValue);
+        
         this.img.attr('src',"./Asseti/Placeholder.jpg");
         this.heading.html(this.queryValue);
         this.author.html('');
