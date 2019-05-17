@@ -7,7 +7,7 @@ $colors: (
 @function color($color-name){
     @return map-get($colors, $color-name);
 }
-$width: 492px; 
+$width: 570px; 
 $height: 60vh;
 *{
     margin:0;
@@ -143,7 +143,7 @@ h1 {
         }
     }
 }
-@media screen and (max-width:620px){
+@media screen and (max-width:715px){
     
     #content  
    {
@@ -160,6 +160,6 @@ h1 {
     }
   
     #news-img{
-        min-height: 150px;
+        min-height: 200px;
     }
 }

@@ -27,7 +27,7 @@ body {
 }
 
 .content-width {
-  width: 492px;
+  width: 570px;
   margin: 0 auto;
 }
 
@@ -45,7 +45,7 @@ h1 {
   display: flex;
   margin: 30px auto;
   border: 1px solid #494949;
-  width: 492px;
+  width: 570px;
   border-radius: 5px;
   position: relative;
   overflow: hidden;
@@ -112,7 +112,7 @@ h1 {
 }
 
 #news-display .news-preview {
-  width: 492px;
+  width: 570px;
   height: 60vh;
   border-radius: 5px;
   overflow: hidden;
@@ -166,7 +166,7 @@ h1 {
   text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 715px) {
   #content {
     width: 100%;
   }
@@ -182,7 +182,7 @@ h1 {
     width: 100vw;
   }
   #news-img {
-    min-height: 150px;
+    min-height: 200px;
   }
 }
 /*# sourceMappingURL=styles.css.map */
