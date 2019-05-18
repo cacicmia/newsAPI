@@ -18,12 +18,16 @@ let newsDisplay = {
         $.ajax(url).done(newsDisplay.respond);
     },
     respond (response){
+        console.log(response);
               newsDisplay.articles=[];
          if (response.articles.length>0){
             newsDisplay.current = 0;
             newsDisplay.articles =  response.articles.slice(0,5);
           
         newsDisplay.renderNews(newsDisplay.articles[0]);
+        if (response.articles.length>1){
+           newsDisplay.addClickListeners();
+        }
         } else {
              newsDisplay.noContent();
            
@@ -32,25 +36,39 @@ let newsDisplay = {
         }
     },
    
-    renderNews (news) {
-
+    renderNews () {
+        let news= this.articles[this.current];
         if (news.urlToImage) {    
         this.img.attr('src',news.urlToImage);
         } else {
         this.img.attr('src',"./Asseti/Placeholder.jpg");   
         }
         this.heading.html(news.title);
-        this.author.html(news.author);
-       this.content.html(this.adjustContent(news.content, news.description));
+        if (news.author) {
+            this.author.html(news.author);
+        } else {
+            this.author.html(' nepoznat');
+        }
+       this.content.html(this.adjustContent());
         this.origin.attr('href', news.url);
-        this.arrowLeft.click(this.slide.bind(this,false));
-        this.arrowRight.click(this.slide.bind(this,true));
+      
 
     }, 
-    adjustContent(content, description){
+    addClickListeners() {
+        this.arrowLeft.click(this.slide.bind(this,false));
+        this.arrowRight.click(this.slide.bind(this,true));
+    },
+    adjustContent(){
+        let content = this.articles[this.current].content,
+        description = this.articles[this.current].description,
+        srcname = this.articles[this.current].source.name;
         let newContent ="";
+        if (srcname==="Jutarnji.hr"){
+            newContent= description;
+        }else {
         if (content){ 
         let arr= content.split(' ');
+
         if (arr.length<50) {
        newContent= arr.slice(0, arr.length-2).join(' ');
         } else {
@@ -63,7 +81,8 @@ let newsDisplay = {
         } else {
             newContent= 'No content available';
         }
-        
+    }
+       
         return newContent.concat('...') ;
     },
     slide (n) {
@@ -73,7 +92,8 @@ let newsDisplay = {
         
         if (this.articles.length){
         this.currentChange(n);
-        this.renderNews(this.articles[this.current]);
+        this.renderNews();
+        this.addClickListeners();
        
         } else {
            
