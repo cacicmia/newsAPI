@@ -1,21 +1,26 @@
 let newsDisplay = {
     init () {
+        /* reach DOM  */
     this.container = $('#news-display') 
-  
+        
     $('#search-bar').submit(this.performSearch);
   
     
     },
+    /**
+     * @description perform ajax call on news API 
+     */
     performSearch (e) {
         e.preventDefault(); 
         newsDisplay.noContent();
-      
+    
         newsDisplay.queryValue = $('#search-input').val();
         let url = `https://newsapi.org/v2/everything?q=${newsDisplay.queryValue}&apiKey=447fc2f2b2f742588d178279786b6a9a`;
         $.ajax(url).done(newsDisplay.respond);
     },
+    
     respond (response){
-        console.log(response)
+       
               newsDisplay.articles=[];
          if (response.articles.length>0){
             
@@ -30,7 +35,9 @@ let newsDisplay = {
             
         }
     },
-   
+   /**
+    * @description adds articles to the DOM 
+    * */
     renderNews () {
         $.each(newsDisplay.articles,(i,article)=>{
             this.container.append(this.createArticle(article));
@@ -40,7 +47,12 @@ let newsDisplay = {
        
       
 
-    }, 
+    },
+    /**
+     * @desription build and parse DOM for every article
+     * @param {object} article article data
+     * @return article DOM element
+      */ 
   createArticle(article){
     if (!article.urlToImage) {    
       
@@ -64,6 +76,10 @@ let newsDisplay = {
     </article>`;
         return $.parseHTML(articleDOM);
   },
+  /**
+   * @description convert date format
+   * @returns {string} date to render
+    */
   setDate(date){
      date= new Date(date);
     let year= date.getFullYear();
@@ -72,6 +88,11 @@ let newsDisplay = {
     day = date.getDate();
     return `${month} ${day}, ${year}`;
   },
+  /**
+   * @description adjust data for rendering
+   * @param {object} article
+   *  
+   */
     adjustContent(article){
         let content = article.content,
         description = article.description;
@@ -95,7 +116,9 @@ let newsDisplay = {
        
         return newContent.concat('...') ;
     },
-   
+   /**
+    * @description clear container
+    */
     noContent () {
         
         this.container.empty();
