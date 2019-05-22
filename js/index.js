@@ -1,13 +1,9 @@
 let newsDisplay = {
     init () {
-    this.img= $('#news-img');
-    this.heading =  $('#news-heading');
-    this.author = $('#news-author');
-    this.content= $('#news-content');
-    this.origin = $('#news-origin');
+    this.container = $('#news-display') 
+  
     $('#search-bar').submit(this.performSearch);
-    this.arrowLeft= $('#arrow-left');
-    this.arrowRight= $('#arrow-right');
+  
     
     },
     performSearch (e) {
@@ -21,13 +17,11 @@ let newsDisplay = {
         console.log(response);
               newsDisplay.articles=[];
          if (response.articles.length>0){
-            newsDisplay.current = 0;
-            newsDisplay.articles =  response.articles.slice(0,5);
+            
+            newsDisplay.articles =  response.articles.slice();
           
-        newsDisplay.renderNews(newsDisplay.articles[0]);
-        if (response.articles.length>1){
-           newsDisplay.addClickListeners();
-        }
+        newsDisplay.renderNews();
+       
         } else {
              newsDisplay.noContent();
            
@@ -37,31 +31,41 @@ let newsDisplay = {
     },
    
     renderNews () {
-        let news= this.articles[this.current];
-        if (news.urlToImage) {    
-        this.img.attr('src',news.urlToImage);
-        } else {
-        this.img.attr('src',"./Asseti/Placeholder.jpg");   
-        }
-        this.heading.html(news.title);
-        if (news.author) {
-            this.author.html(news.author);
-        } else {
-            this.author.html(' nepoznat');
-        }
-       this.content.html(this.adjustContent());
-        this.origin.attr('href', news.url);
+        $.each(newsDisplay.articles,(article)=>{
+            this.container.append(createArticle(article));
+            
+
+        });
+       
       
 
     }, 
-    addClickListeners() {
-        this.arrowLeft.click(this.slide.bind(this,false));
-        this.arrowRight.click(this.slide.bind(this,true));
-    },
-    adjustContent(){
-        let content = this.articles[this.current].content,
-        description = this.articles[this.current].description,
-        srcname = this.articles[this.current].source.name;
+  createArticle(article){
+    if (!article.urlToImage) {    
+      
+        article.urlToImage("./Asseti/Placeholder.jpg");   
+        }
+       
+        if (!article.author) {
+            article.author(' nepoznat');
+        }
+      
+    let articleDOM= ` <article class="news">
+    <img src="${article.urlToImage}" alt="news preview" class="news-img">
+    <div class="news-article">
+        <h2 class="news-heading">${article.title}</h2>
+        <p class="small">Autor:<span class="news-author">${article.author}</span></p>
+        <p class="news-content">${adjustContent(article)}</p>
+        <a class="news-origin" href="${article.url}" target="blank"><p>Pročitaj članak</p></a>
+
+    </div>
+    </article>`;
+        return $.parseHTML(articleDOM);
+  },
+    adjustContent(article){
+        let content = article.content,
+        description = article.description,
+        srcname = article.source.name;
         let newContent ="";
         if (srcname==="Jutarnji.hr"){
             newContent= description;
@@ -85,28 +89,10 @@ let newsDisplay = {
        
         return newContent.concat('...') ;
     },
-    slide (n) {
-     
-        this.arrowLeft.off('click');
-        this.arrowRight.off('click');
-        
-        if (this.articles.length){
-        this.currentChange(n);
-        this.renderNews();
-        this.addClickListeners();
-       
-        } else {
-           
-        }
-        },
+   
     noContent () {
         
-        this.img.attr('src',"./Asseti/Placeholder.jpg");
-        this.heading.html(this.queryValue);
-        this.author.html('');
-        this.origin.attr('href','#');
-        this.articles= [];
-        this.content.html('Ne postoje rezultati');
+        this.container.
       
        
     },

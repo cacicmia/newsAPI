@@ -7,8 +7,8 @@ $colors: (
 @function color($color-name){
     @return map-get($colors, $color-name);
 }
-$width: 570px; 
-$height: 60vh;
+$width: calc(100% - 40px); 
+
 *{
     margin:0;
     padding: 0;
@@ -26,12 +26,13 @@ body{
 
 
 #content {
-    margin: 0 auto;
+    margin: 0 20px;
+    width: $width;
     
 }
 .content-width{
     width: $width;
-    margin: 0 auto;
+    margin: 0 20px;
 
 }
 h1 {
@@ -77,40 +78,34 @@ h1 {
 }
 #news-display {
     display: flex;
-  
+    width: $width;
     align-items: center;
-    margin: 0 auto;
+    margin: 0 20px;
+    flex-flow: column;
 
-    .arrow {
-       padding: 1em;
-       margin: 20px;
-       border: none;
-    }
-    #arrow-left {
-        background: url(../Asseti/left-arrow.svg) no-repeat center/contain;
-    }
-    #arrow-right{
-        background: url(../Asseti/right-arrow.svg) no-repeat center/contain;
-    }
-    .news-preview{
-        width: $width;
-        height: $height;
+  
+    .news {
+       width:100%;
+        margin: 10px;
         border-radius:5px;
         overflow:hidden;
         display:flex;
+        height: 120px;
         
         
-        #news-img{
+        .news-img{
             overflow: auto;
             object-fit: cover;
             min-width: 150px;
             
         }
-        #news-article{
+        .news-article{
             padding: 20px;
             background-color: color(background);
-            min-width: 52%;
+            min-width:70%;
             position: relative;
+            display: flex;
+            flex-flow: column;
             .small {
                 font-size: 0.8em;
             }
@@ -119,7 +114,7 @@ h1 {
                 letter-spacing: -0.5px;
             }
           
-            #news-heading {
+            .news-heading {
                 font-weight: 800;
                 letter-spacing: -1px;
                 color: color(text);
@@ -135,7 +130,7 @@ h1 {
                 bottom: 1em;
                
             }
-            #news-content{
+            .news-content{
                 padding: 1em 0;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -154,12 +149,9 @@ h1 {
     #search-bar {
         width: 80%;
     }
-    #news-display .news-preview  {
-        flex-flow: column; 
-       width:100vw;
-    }
+   
   
-    #news-img{
+    .news-img{
         min-height: 200px;
     }
 }
