@@ -15,7 +15,13 @@ let newsDisplay = {
         newsDisplay.noContent();
     
         newsDisplay.queryValue = $('#search-input').val();
-        let url = `https://newsapi.org/v2/everything?q=${newsDisplay.queryValue}&apiKey=447fc2f2b2f742588d178279786b6a9a`;
+        newsDisplay.lang= $('#lang').val();
+        let url;
+        if (newsDisplay.lang) {
+            url = `https://newsapi.org/v2/everything?q=${newsDisplay.queryValue}&language=${newsDisplay.lang}&apiKey=447fc2f2b2f742588d178279786b6a9a`;
+        } else {
+         url = `https://newsapi.org/v2/everything?q=${newsDisplay.queryValue}&apiKey=447fc2f2b2f742588d178279786b6a9a`;
+        }
         $.ajax(url).done(newsDisplay.respond);
     },
     
