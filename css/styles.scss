@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
 $colors: (
     text: #494949,
-    background: #f2f2f2,
-    placeholder: #acacac
+    background: #f5f6f7,
+    placeholder: #babcbf
 );
 @function color($color-name){
     @return map-get($colors, $color-name);
@@ -63,7 +63,7 @@ h1 {
         vertical-align: middle;
         border: none;   
         border-right: 10px solid #fff;
-       
+        border-left: 10px solid #fff;
     }
     #search-input{
         width: 75%;
@@ -74,6 +74,18 @@ h1 {
     #search-input::placeholder {
         padding: 5px;
         color: color(placeholder);
+    }
+    #cancel{
+        padding: 2px 15px;
+        background-color: #fff;
+        border:none;
+        font-size: 1.5em;
+    }
+    #search-button:hover,
+    #cancel:hover,
+    #search-button:focus,
+    #cancel:focus {
+        background-color: color(background);
     }
 
 }
@@ -93,7 +105,7 @@ h1 {
         overflow:hidden;
         display:flex;
         height: 150px;
-        border: 1px solid #000;
+        border: 1px solid color(text);
        
 
         
@@ -106,7 +118,7 @@ h1 {
         }
         .news-article{
             padding: 10px;
-            background-color: color(background);
+            
             overflow: hidden;
             position: relative;
           

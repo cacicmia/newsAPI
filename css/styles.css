@@ -59,6 +59,7 @@ h1 {
   vertical-align: middle;
   border: none;
   border-right: 10px solid #fff;
+  border-left: 10px solid #fff;
 }
 
 #search-bar #search-input {
@@ -70,22 +71,36 @@ h1 {
 
 #search-bar #search-input::-webkit-input-placeholder {
   padding: 5px;
-  color: #acacac;
+  color: #babcbf;
 }
 
 #search-bar #search-input:-ms-input-placeholder {
   padding: 5px;
-  color: #acacac;
+  color: #babcbf;
 }
 
 #search-bar #search-input::-ms-input-placeholder {
   padding: 5px;
-  color: #acacac;
+  color: #babcbf;
 }
 
 #search-bar #search-input::placeholder {
   padding: 5px;
-  color: #acacac;
+  color: #babcbf;
+}
+
+#search-bar #cancel {
+  padding: 2px 15px;
+  background-color: #fff;
+  border: none;
+  font-size: 1.5em;
+}
+
+#search-bar #search-button:hover,
+#search-bar #cancel:hover,
+#search-bar #search-button:focus,
+#search-bar #cancel:focus {
+  background-color: #f5f6f7;
 }
 
 #news-display {
@@ -111,7 +126,7 @@ h1 {
   display: -ms-flexbox;
   display: flex;
   height: 150px;
-  border: 1px solid #000;
+  border: 1px solid #494949;
 }
 
 #news-display .news .news-img {
@@ -121,7 +136,6 @@ h1 {
 
 #news-display .news .news-article {
   padding: 10px;
-  background-color: #f2f2f2;
   overflow: hidden;
   position: relative;
 }
